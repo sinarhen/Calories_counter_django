@@ -1,0 +1,6 @@
+/venv/
+/calories_counter/calories_counter/__init__.py
+/calories_counter/main_app/__init__.py
+/calories_counter/main_app/migrations/
+.idea/
+calories_counter/calories_counter/__pycache__/
