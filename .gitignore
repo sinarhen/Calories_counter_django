@@ -4,3 +4,4 @@
 /calories_counter/main_app/migrations/
 .idea/
 calories_counter/calories_counter/__pycache__/
+/calories_counter/db.sqlite3

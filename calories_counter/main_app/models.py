@@ -17,8 +17,8 @@ class Product(models.Model):
     protein = models.DecimalField(verbose_name="Protein", max_digits=4, decimal_places=1, default=0.0)
     carbohydrate = models.DecimalField(verbose_name="Carbohydrate", max_digits=4, decimal_places=1, default=0.0)
     fats = models.DecimalField(verbose_name="Fats", decimal_places=1, max_digits=4, default=0.0)
-    photo = models.ImageField(verbose_name='Photo', db_index=True, upload_to=create_path)
-    type_of_food = models.ForeignKey('FoodType', on_delete=models.PROTECT)
+    photo = models.ImageField(verbose_name='Photo', upload_to=create_path)
+    type_of_food = models.ForeignKey('FoodType', on_delete=models.PROTECT, db_index=True,)
 
     def __str__(self):
         return self.name
