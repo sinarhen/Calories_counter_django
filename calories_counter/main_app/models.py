@@ -5,7 +5,7 @@ import os
 # Create your models here.
 def create_path(instance, filename):
     return os.path.join(
-        instance.name,
+        instance.type_of_food if isinstance(instance, Product) else instance.name,
         filename
     )
 
@@ -32,6 +32,7 @@ class Product(models.Model):
 class FoodType(models.Model):
     name = models.CharField(verbose_name='Name', max_length=255)
     description = models.TextField(verbose_name='Description')
+    photo = models.ImageField(verbose_name='Photo of type', upload_to=create_path)
 
     def __str__(self):
         return self.name
