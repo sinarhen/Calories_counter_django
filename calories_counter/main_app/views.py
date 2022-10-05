@@ -14,5 +14,6 @@ def index(request):
 def calculator(request):
     """Catalog is where all products located"""
     categories = FoodType.objects.all()
-    products = FoodType.objects.all()
-    return render(request, template_name="main_app/catalog.html")
+    products = Product.objects.all()
+    return render(request, template_name="main_app/catalog.html", context={'categories': categories,
+                                                                           'products': products})

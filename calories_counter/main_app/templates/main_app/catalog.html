@@ -5,8 +5,11 @@
     <title>Catalog</title>
 </head>
 <body>
-    {% for category in categories%}
-
+    {% for category in categories %}
+        <div>
+            <img src="{{ category.photo.url }}" alt="Unavalaible">
+            <h2>{{ category.name }}</h2>
+        </div>
     {% endfor %}
 
 </body>
