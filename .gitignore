@@ -5,3 +5,7 @@
 .idea/
 calories_counter/calories_counter/__pycache__/
 /calories_counter/db.sqlite3
+/calories_counter/cart/__init__.py
+/calories_counter/cart/migrations/
+/calories_counter/media/
+/calories_counter/__init__.py
