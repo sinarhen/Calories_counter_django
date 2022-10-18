@@ -1,0 +1,18 @@
+{% extends 'main_app/base.html' %}
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+    <h1>{{ name }}</h1>
+    <div class="row">
+    {% for product in products %}
+        <div class="alert alert-dark">
+            <a href="{% url 'detail_view_product' name.pk product.pk %}">
+            <img src="{{ product.photo.url }}" alt="Unavalaible">
+            <h2>{{ product.name }}</h2>
+                <p>Калории: {{ product.calories }}
+                </p>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -13,13 +13,14 @@ import os
 
 def path_for_type(instance, filename):
     return os.path.join(
-        f"Foodtypes/{instance.name}"if isinstance(instance, FoodType) else f"Foodtypes/{instance.type_of_food.name}/"
-                                                                           f"{instance.name}", filename
+        f"Foodtypes/{instance.name}" if isinstance(instance, FoodType) else f"Foodtypes/{instance.type_of_food.name}/"
+                                                                            f"{instance.name}", filename
     )
 
 
 class Product(models.Model):
     name = models.CharField(verbose_name="Name", max_length=255, blank=False)
+    description = models.TextField(verbose_name='Description', blank=True)
     price = models.DecimalField(verbose_name="Average Price", blank=False, max_digits=10, decimal_places=1)
     calories = models.IntegerField(verbose_name="Calories", blank=False)
     protein = models.DecimalField(verbose_name="Protein", max_digits=4, decimal_places=1, default=0.0)
@@ -35,6 +36,9 @@ class Product(models.Model):
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
         ordering = ("id",)
+
+    def get_absolute_url(self):
+        return f"/catalog/{self.type_of_food_id}/{self.id}/"
 
 
 class FoodType(models.Model):

@@ -1,1 +1,6 @@
 {% extends 'main_app/base.html' %}
+
+{% block content %}
+    <h1>Your website for calories counting</h1>
+    <p>go to the catalog page <a href="{% url 'catalog' %}" class="btn btn-success">Catalog</a></p>
+{% endblock %}

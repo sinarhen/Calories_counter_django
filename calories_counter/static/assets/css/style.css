@@ -1,6 +1,82 @@
-.header{
-    float: left;
-    height: 5%;
+html{
     min-width: 100vh;
+    min-height: 100vh;
+}
+body{
+    font-family: Georgia;
+}
+.header{
+    float: top;
+    min-height: available;
+    max-height: available;
+    min-width: 100%;
     background-color: #7ee47f;
+    font-size: 40px;
+}
+.header ul{
+    list-style: none;
+    padding: 0 0 0 0;
+
+}
+.header ul li{
+    display: inline-block;
+    color: white;
+    margin-top: 0.7%;
+    margin-bottom: 0.7%;
+}
+.header ul li a{
+    margin: 0 10px 0 10px;
+    text-decoration: none;
+    transition-duration: 0.7s;
+    color: white;
+}
+.header ul li a:hover{
+    color: #7ee47f;
+}
+.container{
+    background-color: white;
+    margin-top: 20px;
+}
+.container h1{
+    font-size: 65px;
+    text-align: center;
+}
+.container p{
+    font-size: 40px;
+}
+.container a{
+    text-decoration: none;
+}
+.container h2{
+    color: black;
+}
+.alert-dark img{
+    max-width: 150px;
+    height: auto;
+}
+.alert-dark{
+    max-width: min-content;
+}
+.alert-dark p {
+    font-size: medium;
+}
+.alert{
+    background-color: #7ee47f;
+}
+.alert-success img{
+    max-width: 500px;
+    height: auto;
+}
+.header ul li:last-child{
+    float: right;
+    margin-right: 30px;
+}
+.table-bordered tr td img{
+    max-width: 100px;
+}
+.form-control{
+    width: 250px;
+}
+form p label{
+    font-size: 40px;
 }

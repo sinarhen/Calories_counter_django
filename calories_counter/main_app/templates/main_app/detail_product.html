@@ -1,0 +1,30 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="alert alert-success">
+        <div class="row">
+            <img class="col"  src="{{ product.photo.url }}" alt="Unavalaible">
+            <div class="col-md-auto">
+                <h1>{{ product.name }}</h1>
+
+                <ul>
+                    <li>Calories: {{ product.calories }}kcal</li>
+                    <li>Protein: {{ product.protein }}g/100g</li>
+                    <li>Carbohydrate: {{ product.carbohydrate }}g/100g</li>
+                    <li>Fats: {{ product.fats }}g/100g</li>
+                </ul>
+            </div>
+        </div>
+        <p>Description: <br>
+            {{ product.description }}</p>
+
+        <p>Average price: {{ product.price }}grn/Shtuka</p>
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {% csrf_token %}
+            {{ form.quantity }}
+            <button type="submit" formmethod="post" class="btn btn-outline-success">Add to diet</button>
+        </form>
+        </div>
+{% endblock %}

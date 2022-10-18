@@ -1,10 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "main_app/base.html" %}
+{% load static %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+    <h1>Your shopping cart</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Price</th>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Carbohydrate</th>
+            <th>Fats</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="
+                                {% if product.photo %}
+                                    {{ product.photo.url }}
+                                {% else %}
+                                    {% static "assets/img/no_img.jpg" %}
+                                {% endif %}">
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ product.price }}grn</td>
+                    <td>{{ item.total_price }}grn</td>
+                    <td>{{ item.total_calories }}kcal</td>
+                    <td>{{ item.total_protein }}g</td>
+                    <td>{{ item.total_carbohydrate }}g</td>
+                    <td>{{ item.total_fats }}g</td>
+                    <td>
+                        <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                            {% csrf_token %}
+                            {{ form.quantity }}
+                            <button class="btn btn-outline-success btn-sm" type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4">{{ cart.get_total_price }} grn</td>
+            <td class="num">{{ cart.get_total_calories }} kcal</td>
+            <td class="num">{{ cart.get_total_protein }} g</td>
+            <td class="num">{{ cart.get_total_carbohydrate }} g</td>
+            <td class="num">{{ cart.get_total_fats }} g</td>
+            <td class="num"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+    <form method="post" action="{% url 'cart:calculator' %}">
+        {% csrf_token %}
+        {{ calc_form.as_p }}
+        <button type="submit" class="btn btn-sm btn-outline-success" formmethod="post">Calculate</button>
+        <br>
+        <label><h2>Your result is: {{ request.session.result }}Kcal</h2></label>
+    </form>
+    <a href="{% url "catalog" %}" class="button light">Continue shopping</a>
+    </p>
+{% endblock %}

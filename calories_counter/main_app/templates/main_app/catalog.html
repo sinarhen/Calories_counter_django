@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Catalog</title>
-</head>
-<body>
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+    <h1>Categories</h1>
     {% for category in categories %}
-        <div>
+        <div class="alert alert-dark">
+            <h1></h1>
+            <a href="{% url 'detail_view_category' category.pk %}">
             <img src="{{ category.photo.url }}" alt="Unavalaible">
             <h2>{{ category.name }}</h2>
+            </a>
         </div>
     {% endfor %}
-
-</body>
-</html>
+{% endblock %}
