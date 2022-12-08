@@ -14,6 +14,6 @@ def calculator(gender, weight, height, age, physical_activity_choice):
 
     if gender == '1':  # Male
         result = (10 * weight + 6.25 * height - 5 * age + 5) * physical_activity
-    elif gender == '2':
+    elif gender == '2':  # Female
         result = (10 * weight + 6.25 * height - 5 * age - 161) * physical_activity
     return result

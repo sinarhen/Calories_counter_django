@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 
 BIG_QUANTITY_VALUE_ERROR = 'Too big value, please enter a value less then 100'
 
@@ -14,11 +13,16 @@ PHYSICAL_ACTIVITY_CHOICES = {'2': 'Minimum quantity of physical activity',
 
 
 class CartEditProductQuantityForm(forms.Form):
-    quantity = forms.IntegerField(error_messages={'required': 'Please enter some integer value'},
-                                  widget=forms.TextInput(attrs={'class': 'form-control'}))
+    quantity = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     update = forms.BooleanField(required=False,
                                 initial=False,
                                 widget=forms.HiddenInput)
+
+    def clean_quantity(self):
+        val = self.cleaned_data['quantity']
+        if val >= 100:
+            raise forms.ValidationError(BIG_QUANTITY_VALUE_ERROR)
+        return val
 
 
 class CalcForm(forms.Form):
