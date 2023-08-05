@@ -6,12 +6,21 @@ from main_app.models import Product
 from .calculator import calculator
 
 
-# Create your views here.
+# Add product to cart
 @require_POST
 def cart_add(request, product_id):
+    """
+    Adds a product to the cart with the specified quantity.
+    
+    Arguments:
+    - request: The HTTP request object.
+    - product_id: The ID of the product to be added to the cart.
+    
+    Returns:
+    - A redirect to the cart detail page.
+    """
     cart = Cart(request)
-    product = Product.objects.get(id=product_id)
-    print('product got')
+    product = get_object_or_404(Product, id=product_id)
     form = CartEditProductQuantityForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
@@ -21,8 +30,19 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+# Remove product from cart
 @require_POST
 def cart_remove(request, product_id):
+    """
+    Removes a product from the cart with the specified quantity.
+    
+    Arguments:
+    - request: The HTTP request object.
+    - product_id: The ID of the product to be removed from the cart.
+    
+    Returns:
+    - A redirect to the cart detail page.
+    """
     cart = Cart(request)
     form = CartEditProductQuantityForm(request.POST)
     product = get_object_or_404(Product, id=product_id)
@@ -34,7 +54,17 @@ def cart_remove(request, product_id):
     return redirect('cart:cart_detail')
 
 
+# Display cart details
 def cart_detail(request):
+    """
+    Displays the contents of the cart.
+    
+    Arguments:
+    - request: The HTTP request object.
+    
+    Returns:
+    - The rendered cart detail page.
+    """
     cart = Cart(request)
     form = CartEditProductQuantityForm()
     calc_form = CalcForm()
@@ -42,7 +72,17 @@ def cart_detail(request):
                   {'cart': cart, 'form': form, 'calc_form': calc_form})
 
 
+# Perform calculations for cart
 def cart_calculator(request):
+    """
+    Performs calculations based on user input and stores the result in the session.
+    
+    Arguments:
+    - request: The HTTP request object.
+    
+    Returns:
+    - A redirect to the cart detail page.
+    """
     if request.method == 'POST':
         calc_form = CalcForm(request.POST)
         if calc_form.is_valid():
